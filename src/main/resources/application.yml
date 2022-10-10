@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://101.35.143.169:5432/demo
+    username: postgres
+    password: Yanyuxi19990110
+  redis:
+    host: 101.35.143.169
+    port: 6379
+    password: 12345678
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.diantongren.model
+logging:
+  level:
+    com:
+      diantongren: debug

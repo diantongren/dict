@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diantongren.dao.DictionaryValueMapper">
+    <resultMap id="BaseResultMap" type="com.diantongren.model.DictionaryValue">
+        <!--@mbg.generated-->
+        <!--@Table public.t_dictionary_value-->
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="value" jdbcType="VARCHAR" property="value"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="is_default" jdbcType="BOOLEAN" property="isDefault"/>
+        <result column="css_class" jdbcType="VARCHAR" property="cssClass"/>
+        <result column="list_class" jdbcType="VARCHAR" property="listClass"/>
+        <result column="status" jdbcType="BOOLEAN" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="dictionary_id" jdbcType="BIGINT" property="dictionaryId"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+        <result column="deleted" jdbcType="BOOLEAN" property="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        "label",
+        "value",
+        sort,
+        is_default,
+        css_class,
+        list_class,
+        "status",
+        remark,
+        pid,
+        dictionary_id,
+        create_at,
+        update_at,
+        deleted
+    </sql>
+    <insert id="insert" parameterType="com.diantongren.model.DictionaryValue">
+        <!--@mbg.generated-->
+        insert into public.t_dictionary_value (id, "label", "value",
+                                               sort, is_default, css_class,
+                                               list_class, "status", remark,
+                                               pid, dictionary_id, create_at,
+                                               update_at, deleted)
+        values (#{id,jdbcType=BIGINT}, #{label,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR},
+                #{sort,jdbcType=INTEGER}, #{isDefault,jdbcType=BOOLEAN}, #{cssClass,jdbcType=VARCHAR},
+                #{listClass,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, #{remark,jdbcType=VARCHAR},
+                #{pid,jdbcType=BIGINT}, #{dictionaryId,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT},
+                #{updateAt,jdbcType=BIGINT}, #{deleted,jdbcType=BOOLEAN})
+    </insert>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into public.t_dictionary_value
+        (id, "label", "value", sort, is_default, css_class, list_class, "status", remark,
+         pid, dictionary_id, create_at, update_at, deleted)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.label,jdbcType=VARCHAR}, #{item.value,jdbcType=VARCHAR},
+             #{item.sort,jdbcType=INTEGER}, #{item.isDefault,jdbcType=BOOLEAN}, #{item.cssClass,jdbcType=VARCHAR},
+             #{item.listClass,jdbcType=VARCHAR}, #{item.status,jdbcType=BOOLEAN}, #{item.remark,jdbcType=VARCHAR},
+             #{item.pid,jdbcType=BIGINT}, #{item.dictionaryId,jdbcType=BIGINT}, #{item.createAt,jdbcType=BIGINT},
+             #{item.updateAt,jdbcType=BIGINT}, #{item.deleted,jdbcType=BOOLEAN})
+        </foreach>
+    </insert>
+
+    <select id="findByDictionaryCode" resultMap="BaseResultMap">
+        select v.*
+        from t_dictionary_value v
+                 join t_dictionary k on k.id = v.dictionary_id
+        where k.deleted = false
+          and v.deleted = false
+          and k.dic_code = #{dictCode,jdbcType=VARCHAR}
+        order by v.sort;
+    </select>
+</mapper>

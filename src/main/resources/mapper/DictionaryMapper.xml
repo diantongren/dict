@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diantongren.dao.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.diantongren.model.Dictionary">
+    <!--@mbg.generated-->
+    <!--@Table public.t_dictionary-->
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dic_code" jdbcType="VARCHAR" property="dicCode" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="deleted" jdbcType="BOOLEAN" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, "name", dic_code, "status", remark, create_at, update_at, deleted
+  </sql>
+  <insert id="insert" parameterType="com.diantongren.model.Dictionary">
+    <!--@mbg.generated-->
+    insert into public.t_dictionary (id, "name", dic_code, 
+      "status", remark, create_at, 
+      update_at, deleted)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{dicCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BOOLEAN}, #{remark,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=BIGINT}, #{deleted,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into public.t_dictionary
+    (id, "name", dic_code, "status", remark, create_at, update_at, deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.dicCode,jdbcType=VARCHAR}, 
+        #{item.status,jdbcType=BOOLEAN}, #{item.remark,jdbcType=VARCHAR}, #{item.createAt,jdbcType=BIGINT}, 
+        #{item.updateAt,jdbcType=BIGINT}, #{item.deleted,jdbcType=BOOLEAN})
+    </foreach>
+  </insert>
+</mapper>
