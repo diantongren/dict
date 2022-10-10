@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://101.35.143.169:5432/demo
-    username: postgres
-    password: Yanyuxi19990110
+    url: jdbc:postgresql://xxx:5432/demo
+    username: xxx
+    password: xxx
   redis:
-    host: 101.35.143.169
+    host: xxx
     port: 6379
-    password: 12345678
+    password: xxx
     database: 0
     lettuce:
       pool:
